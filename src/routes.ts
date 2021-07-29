@@ -1,8 +1,10 @@
 import { Router } from 'express'
+import { CreateUserController } from './useCases/createUser/CreateUserController'
 
 const routes = Router()
 
-routes.post('/new', () => {
-})
+const createUserController = new CreateUserController()
+
+routes.post('/users', createUserController.handle)
 
 export { routes }
