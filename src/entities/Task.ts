@@ -15,6 +15,9 @@ class Task {
     description: string;
 
     @Column()
+    state: string;
+
+    @Column()
     belongs_to: string;
 
     @JoinColumn({ name: 'belongs_to' })
@@ -30,6 +33,10 @@ class Task {
     constructor() {
         if (!this.id) {
             this.id = uuid()
+        }
+
+        if (!this.state) {
+            this.state = 'progress'
         }
     }
 }

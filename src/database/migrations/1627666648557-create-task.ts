@@ -22,6 +22,10 @@ export class createTask1627666648557 implements MigrationInterface {
                         isNullable: true
                     },
                     {
+                        name: 'state',
+                        type: 'varchar'
+                    },
+                    {
                         name: 'belongs_to',
                         type: 'varchar',
                     },
