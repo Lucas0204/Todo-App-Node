@@ -11,12 +11,16 @@ const createTaskController = new CreateTaskController()
 const deleteTaskController = new DeleteTaskController()
 const updateTaskController = new UpdateTaskController()
 
+// Create User - 
 routes.post('/users', createUserController.handle)
 
+// Create Task -
 routes.post('/tasks', createTaskController.handle)
 
+// Delete Task
 routes.delete('/tasks/:id', deleteTaskController.handle)
 
-routes.post('/tasks/:id', updateTaskController.handle)
+// Update Task
+routes.put('/tasks/:id', updateTaskController.handle)
 
 export { routes }

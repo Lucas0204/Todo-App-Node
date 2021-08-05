@@ -1,17 +1,11 @@
 import { getCustomRepository, UpdateResult } from "typeorm";
-import { TasksRepositories } from '../../repositories/TasksRepositories'
+import { TasksRepositories } from '../../repositories/TasksRepositories';
 
 interface IUpdateRequest {
     id: string;
     state: string;
     name: string;
     description: string;
-}
-
-interface IUpdateTask {
-    state?: string;
-    name?: string;
-    description?: string;
 }
 
 class UpdateTaskService {
@@ -25,10 +19,18 @@ class UpdateTaskService {
             throw new Error('Task is not found!')
         }
 
-        const updatedTask: IUpdateTask = {
-            state,
-            name,
-            description
+        let updatedTask: {[key: string]: any} = {};
+
+        if (state) {
+            updatedTask.state = state
+        }
+
+        if (name) {
+            updatedTask.name = name
+        }
+
+        if (description) {
+            updatedTask.description = description
         }
 
         try {
