@@ -7,7 +7,7 @@ class UpdateUserController {
         const updateUserService = new UpdateUserService()
 
         const { username, password } = req.body
-        const { id } = req.params
+        const { user_id: id } = req
 
         const message = await updateUserService.execute({
             id,

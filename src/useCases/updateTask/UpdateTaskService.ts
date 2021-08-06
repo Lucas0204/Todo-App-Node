@@ -2,7 +2,8 @@ import { getCustomRepository, UpdateResult } from "typeorm";
 import { TasksRepositories } from '../../repositories/TasksRepositories';
 
 interface IUpdateRequest {
-    id: string;
+    taskId: string;
+    userId: string;
     state: string;
     name: string;
     description: string;
@@ -10,13 +11,20 @@ interface IUpdateRequest {
 
 class UpdateTaskService {
 
-    async execute({ id, state, name, description }: IUpdateRequest): Promise<UpdateResult> {
+    async execute({ taskId, userId, state, name, description }: IUpdateRequest): Promise<UpdateResult> {
         const tasksRepositories = getCustomRepository(TasksRepositories)
 
-        const task = await tasksRepositories.findOne(id)
+        const task = await tasksRepositories.findOne(taskId)
 
         if (!task) {
             throw new Error('Task is not found!')
+        }
+
+        // check if the task belongs to the logged in user
+        const taskBelongsMatch = task.belongs_to === userId ? true : false
+
+        if (!taskBelongsMatch) {
+            throw new Error('Task id incorrect! Try again!')
         }
 
         // Find what will be updated

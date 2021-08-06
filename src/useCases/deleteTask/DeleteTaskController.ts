@@ -5,9 +5,13 @@ class DeleteTaskController {
 
     async handle(req: Request, res: Response): Promise<Response> {
         const deleteTaskService = new DeleteTaskService()
-        const { id } = req.params
+        const { id: taskId } = req.params
+        const { user_id: userId } = req
 
-        const response = await deleteTaskService.execute(id)
+        const response = await deleteTaskService.execute({
+            taskId,
+            userId
+        })
 
         return res.json(response)
     }

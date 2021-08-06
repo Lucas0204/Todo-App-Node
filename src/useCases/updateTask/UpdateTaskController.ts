@@ -6,10 +6,12 @@ class UpdateTaskController {
     async handle(req: Request, res: Response): Promise<Response> {
         const updateTaskService = new UpdateTaskService()
         const { state, name, description } = req.body
-        const { id } = req.params
+        const { id: taskId } = req.params
+        const { user_id: userId } = req
 
         const updatedTask = await updateTaskService.execute({
-            id,
+            taskId,
+            userId,
             state,
             name,
             description

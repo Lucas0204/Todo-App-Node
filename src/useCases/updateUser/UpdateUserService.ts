@@ -23,6 +23,13 @@ class UpdateUserService {
         let updatedData: { [key: string]: any } = {}
 
         if (username) {
+
+            const usernameAlreadyExists = await usersRepositories.findOne({ username })
+
+            if (usernameAlreadyExists) {
+                throw new Error('Username is already exists!')
+            }
+
             updatedData.username = username
         }
 
