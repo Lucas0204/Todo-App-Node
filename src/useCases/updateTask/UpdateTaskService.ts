@@ -19,23 +19,24 @@ class UpdateTaskService {
             throw new Error('Task is not found!')
         }
 
-        let updatedTask: {[key: string]: any} = {};
+        // Find what will be updated
+        let updatedData: { [key: string]: any } = {};
 
         if (state) {
-            updatedTask.state = state
+            updatedData.state = state
         }
 
         if (name) {
-            updatedTask.name = name
+            updatedData.name = name
         }
 
         if (description) {
-            updatedTask.description = description
+            updatedData.description = description
         }
 
         try {
-            const newTask = await tasksRepositories.update(task, updatedTask)
-            return newTask
+            const updatedTask = await tasksRepositories.update(task, updatedData)
+            return updatedTask
         } catch(err) {
             throw new Error('There was an error with the update, try again!')
         }
