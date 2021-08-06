@@ -9,13 +9,13 @@ class UpdateUserController {
         const { username, password } = req.body
         const { id } = req.params
 
-        const user = updateUserService.execute({
+        const message = await updateUserService.execute({
             id,
             username,
             password
         })
 
-        return res.json(user)
+        return res.json(message)
     }
 }
 
