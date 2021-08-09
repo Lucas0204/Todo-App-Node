@@ -11,7 +11,11 @@ class ListTasksService {
         const tasks = await tasksRepositories.find({ belongs_to: userId })
 
         if (!tasks) {
-            throw new Error('Error! Cannot find tasks that belongs to you!')
+            throw new Error('Error! There was an error in the request, try again')
+        }
+
+        if (tasks[0] == null) {
+            throw new Error("You don't have any tasks, add one")
         }
 
         return tasks
