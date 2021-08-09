@@ -6,6 +6,7 @@ import { UpdateTaskController } from './useCases/updateTask/UpdateTaskController
 import { UpdateUserController } from './useCases/updateUser/UpdateUserController'
 import { AuthenticateUserController } from './useCases/authenticateUser/AuthenticateUserController'
 import { ensureAuthenticated } from './middlewares/ensureAuthenticated'
+import { ListTasksController } from './useCases/listTasks/ListTasksController'
 
 const routes = Router()
 
@@ -15,6 +16,7 @@ const deleteTaskController = new DeleteTaskController()
 const updateTaskController = new UpdateTaskController()
 const updateUserController = new UpdateUserController()
 const authenticateUserController = new AuthenticateUserController()
+const listTasksController = new ListTasksController()
 
 // Create User - 
 routes.post('/users', createUserController.handle)
@@ -33,5 +35,8 @@ routes.put('/tasks/:id', ensureAuthenticated, updateTaskController.handle)
 
 // Update User -
 routes.put('/users', ensureAuthenticated, updateUserController.handle)
+
+// List Tasks -
+routes.get('/tasks', ensureAuthenticated, listTasksController.handle)
 
 export { routes }
